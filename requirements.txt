@@ -1,3 +1,4 @@
 rocketry
-fastapi
+fastapi<0.100
 uvicorn[standard]
+pydantic<2

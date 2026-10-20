@@ -8,6 +8,13 @@ from rocketry.conds import every
 
 app = Rocketry(config={"task_execution": "async"})
 
+if __package__:
+    from .live_collector import register_live_collector
+else:
+    from live_collector import register_live_collector
+
+register_live_collector(app)
+
 @app.task(every('10 seconds', based="finish"))
 async def do_permanently():
     "This runs for really long time"
@@ -22,12 +29,6 @@ async def do_short():
 async def do_long():
     "This runs for long time"
     await asyncio.sleep(60)
-
-@app.task(every('10 seconds', based="finish"))
-async def do_fail():
-    "This fails constantly"
-    await asyncio.sleep(10)
-    raise RuntimeError("Whoops!")
 
 if __name__ == "__main__":
     # Run only Rocketry
