@@ -1,0 +1,3 @@
+-r requirements.txt
+apscheduler>=3.10,<4
+celery[redis]>=5.4,<6

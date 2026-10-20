@@ -15,14 +15,14 @@ DEFAULT_DATABASE_PATH = Path(__file__).resolve().parent.parent / "collector.sqli
 FETCH_TIMEOUT_SECONDS = 20
 
 
-def _validate_source_url(url):
+def validate_source_url(url):
     parsed_url = urlparse(url)
     if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
         raise ValueError("LIVE_DATA_URL must be an absolute HTTP or HTTPS URL")
 
 
 def fetch_json(url):
-    _validate_source_url(url)
+    validate_source_url(url)
     request = Request(url, headers={"Accept": "application/json"})
     with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
         return json.loads(response.read().decode("utf-8"))
@@ -66,7 +66,7 @@ def register_live_collector(rocketry_app):
     if not source_url:
         return False
 
-    _validate_source_url(source_url)
+    validate_source_url(source_url)
     database_path = Path(
         os.environ.get("LIVE_DATA_DB", str(DEFAULT_DATABASE_PATH))
     )
