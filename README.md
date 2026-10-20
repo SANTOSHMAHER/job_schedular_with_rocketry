@@ -22,7 +22,7 @@ modify ``app/api.py`` as needed.
 Clone this repository:
 
 ```console
-git clone https://github.com/SANTOSHMAHER/job_schedular_with_rocketry.git
+git clone https://github.com/SANTOSHMAHER/scheduler-comparison-rocketry-apscheduler-celery-beat.git
 ```
 
 Make sure you have Python 3.7 or newer.
